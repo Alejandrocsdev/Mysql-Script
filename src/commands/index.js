@@ -29,6 +29,8 @@ const commands = async (argv) => {
         return user('create', argument);
       case 'user:drop':
         return user('drop', argument);
+      case 'user:db:show':
+        return user('db:show', argument);
       // DATABASE
       case 'db:show':
         return db('show');
@@ -36,6 +38,12 @@ const commands = async (argv) => {
         return db('create', argument);
       case 'db:drop':
         return db('drop', argument);
+      case 'db:grant':
+        return db('grant', argument);
+      case 'db:revoke':
+        return db('revoke', argument);
+      case 'db:user:show':
+        return db('user:show', argument);
       // CONFIGURATION
       case 'config':
         return config();

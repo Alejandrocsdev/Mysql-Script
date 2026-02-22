@@ -1,18 +1,16 @@
-const { colors, header, execute } = require('../utils');
+const { colors, header, execute, decodeConfig } = require('../utils');
 const { red, blue } = colors;
+
+const SYSTEM_USERS = [
+  'debian-sys-maint',
+  'mysql.infoschema',
+  'mysql.session',
+  'mysql.sys',
+  'root',
+];
 
 const user = (action, config) => {
   header('MySQL Users');
-
-  const decodeConfig = (str) => {
-    if (!str) return {};
-    const obj = {};
-    str.split(',').forEach((pair) => {
-      const [key, value] = pair.split(':');
-      if (key && value) obj[key.trim()] = value.trim();
-    });
-    return obj;
-  };
 
   try {
     // SHOW
@@ -34,7 +32,11 @@ const user = (action, config) => {
     }
     // CREATE
     if (action === 'create') {
-      const { user, host, pass } = decodeConfig(config);
+      const { user, host, pass } = decodeConfig(config, [
+        'user',
+        'host',
+        'pass',
+      ]);
 
       if (!user || !host || !pass) {
         throw new Error('❌ Invalid <spec> argument');
@@ -52,17 +54,43 @@ const user = (action, config) => {
     }
     // DROP
     if (action === 'drop') {
-      const { user, host } = decodeConfig(config);
+      const { user, host } = decodeConfig(config, ['user', 'host']);
 
       if (!user || !host) {
         throw new Error('❌ Invalid <spec> argument');
       }
 
-      const dropQuery = `DROP USER '${user}'@'${host}'`;
+      if (SYSTEM_USERS.includes(user)) {
+        throw new Error('❌ Cannot operate on system user');
+      }
+
+      const dropQuery = `DROP USER '${user}'@'${host}';`;
 
       execute.raw(dropQuery);
 
       console.log(blue(`User '${user}'@'${host}' dropped`));
+      return;
+    }
+    // USER: DATABASE ACCESS
+    if (action === 'db:show') {
+      const { user, host } = decodeConfig(config, ['user', 'host']);
+
+      if (!user || !host) {
+        throw new Error('❌ Invalid <spec> argument');
+      }
+
+      const dbAccessQuery = `
+			  SELECT Db
+        FROM mysql.db
+        WHERE user = '${user}'
+        AND host = '${host}';
+			`;
+
+      const output = execute.table(dbAccessQuery);
+
+      console.log(
+        output || red(`No database have access from '${user}'@'${host}'`),
+      );
       return;
     }
   } catch (error) {

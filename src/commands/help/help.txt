@@ -9,16 +9,25 @@ Commands:
   help:install            Show the MySQL installation steps
   help:system             Show commonly used systemctl commands for MySQL
 
-  show:user               List created MySQL users
-  create:user <spec>      Create a MySQL user
-                          <spec>: user:<name>,host:<host>,pass:<password>
-  drop:user <spec>        Drop a MySQL user
-                          <spec>: user:<name>,host:<host>
+  user:show               List created MySQL users
+  user:create <arg>       Create a MySQL user
+                          <arg>: user:<user>,host:<host>,pass:<password>
+  user:drop <arg>         Drop a MySQL user
+                          <arg>: user:<user>,host:<host>
+  user:db:show <arg>      List databases accessible by user
+                          <arg>: user:<user>,host:<host>
 
-  show:db                 List created MySQL databases
-  create:db <name>        Create a MySQL database
-                          <name>: database name
-  drop:db <name>          Drop a MySQL database
-                          <name>: database name
+  db:show                 List created MySQL databases
+  db:create <arg>         Create a MySQL database
+                          <arg>: name:<dbName>
+  db:drop <arg>           Drop a MySQL database
+                          <arg>: name:<dbName>
+  db:grant <arg>          Grant database access to user
+                          <arg>: name:<dbName>,user:<user>,host:<host>
+  db:revoke <arg>         Revoke database access from user
+                          <arg>: name:<dbName>,user:<user>,host:<host>
+  db:user:show <arg>      List users with access to database
+                          <arg>: name:<dbName>
 
   config                  Open MySQL server config in nano editor
+
