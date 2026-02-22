@@ -1,0 +1,20 @@
+===============
+mysqlScript CLI
+===============
+
+./run.sh <command> [argument]
+
+Commands:
+  help                    Show help message
+  help:install            Show the MySQL installation steps
+  help:system             Show commonly used systemctl commands for MySQL
+
+  show:user               List created MySQL users
+  create:user <spec>      Create a MySQL user
+                          <spec>: user:<name>,host:<host>,pass:<password>
+
+  show:db                 List created MySQL databases
+  create:db <name>        Create a MySQL database
+                          <name>: database name
+
+  config                  Open MySQL server config in nano editor

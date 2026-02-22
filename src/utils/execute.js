@@ -1,6 +1,6 @@
 const { execFileSync } = require('child_process');
 
-const normalize = (query) => query.replace(/\s+/g, ' ');
+const normalize = (query) => query.replace(/\s+/g, ' ').trim();
 
 const raw = (query) => {
   // -e: execute

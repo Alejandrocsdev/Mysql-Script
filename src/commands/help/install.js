@@ -1,8 +1,8 @@
-const { colors, header } = require('../utils');
+const { colors, header } = require('../../utils');
 const { blue } = colors;
 
 const install = () => {
-	header('MySQL Installation (Ubuntu)')
+  header('MySQL Installation (Ubuntu)');
 
   console.log('\n1.Update package list:');
   console.log(blue('  sudo apt update'));
