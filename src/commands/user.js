@@ -15,7 +15,7 @@ const user = (action, config) => {
   };
 
   try {
-		// SHOW
+    // SHOW
     if (action === 'show') {
       const showQuery = `
           SELECT user, host
@@ -32,7 +32,7 @@ const user = (action, config) => {
       console.log(output || red('No users found'));
       return;
     }
-		// CREATE
+    // CREATE
     if (action === 'create') {
       const { user, host, pass } = decodeConfig(config);
 
@@ -48,6 +48,21 @@ const user = (action, config) => {
       execute.raw(createQuery);
 
       console.log(blue(`User '${user}'@'${host}' created`));
+      return;
+    }
+    // DROP
+    if (action === 'drop') {
+      const { user, host } = decodeConfig(config);
+
+      if (!user || !host) {
+        throw new Error('❌ Invalid <spec> argument');
+      }
+
+      const dropQuery = `DROP USER '${user}'@'${host}'`;
+
+      execute.raw(dropQuery);
+
+      console.log(blue(`User '${user}'@'${host}' dropped`));
       return;
     }
   } catch (error) {

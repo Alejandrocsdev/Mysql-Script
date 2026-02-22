@@ -34,6 +34,19 @@ const db = (action, dbName) => {
       console.log(blue(`Database "${dbName}" created`));
       return;
     }
+    // FROP
+    if (action === 'drop') {
+      if (!dbName) {
+        throw new Error('❌ Invalid <name> argument');
+      }
+
+      const dropQuery = `DROP DATABASE ${dbName};`;
+
+      execute.raw(dropQuery);
+
+      console.log(blue(`Database "${dbName}" dropped`));
+      return;
+    }
   } catch (error) {
     console.error('\n❌ Failed to process MySQL database command');
     throw error;

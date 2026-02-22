@@ -23,15 +23,20 @@ const commands = async (argv) => {
       case 'help:system':
         return help('system');
       // USER
-      case 'show:user':
+      case 'user:show':
         return user('show');
-      case 'create:user':
+      case 'user:create':
         return user('create', argument);
+      case 'user:drop':
+        return user('drop', argument);
       // DATABASE
-      case 'show:db':
+      case 'db:show':
         return db('show');
-      case 'create:db':
+      case 'db:create':
         return db('create', argument);
+      case 'db:drop':
+        return db('drop', argument);
+      // CONFIGURATION
       case 'config':
         return config();
     }

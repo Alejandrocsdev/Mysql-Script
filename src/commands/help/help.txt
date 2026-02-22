@@ -12,9 +12,13 @@ Commands:
   show:user               List created MySQL users
   create:user <spec>      Create a MySQL user
                           <spec>: user:<name>,host:<host>,pass:<password>
+  drop:user <spec>        Drop a MySQL user
+                          <spec>: user:<name>,host:<host>
 
   show:db                 List created MySQL databases
   create:db <name>        Create a MySQL database
+                          <name>: database name
+  drop:db <name>          Drop a MySQL database
                           <name>: database name
 
   config                  Open MySQL server config in nano editor
