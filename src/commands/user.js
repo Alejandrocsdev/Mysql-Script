@@ -1,7 +1,7 @@
 const { colors, header, execute } = require('../utils');
 const { red } = colors;
 
-const users = () => {
+const user = () => {
 	header('MySQL Users')
 
   const query = `
@@ -25,4 +25,4 @@ const users = () => {
   }
 };
 
-module.exports = users;
+module.exports = user;

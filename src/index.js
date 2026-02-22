@@ -1,7 +1,7 @@
 // const fs = require('fs');
 // const path = require('path');
 
-const { install, system, users } = require('./commands');
+const { install, system, user, database, config } = require('./commands');
 
 // const configPath = path.join(__dirname, '..', 'config.json');
 
@@ -21,8 +21,18 @@ const main = () => {
       return;
     }
 
-    if (args.length === 1 && args[0] === '--users') {
-      users();
+    if (args.length === 1 && args[0] === '--user') {
+      user();
+      return;
+    }
+
+    if (args.length === 1 && args[0] === '--database') {
+      database();
+      return;
+    }
+
+    if (args.length === 1 && args[0] === '--config') {
+      config();
       return;
     }
 
