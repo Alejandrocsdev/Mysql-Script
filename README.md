@@ -67,7 +67,7 @@ common database tasks fast, safe, and intuitive from the terminal.
 Example:
 
 ``` bash
-./run.sh user:create user:admin,host:192.168.0.100,password:StrongPass123
+./run.sh user:create user:admin,host:192.168.0.100,pass:StrongPass123
 ```
 
 ---
@@ -102,12 +102,12 @@ Example:
 
 #### Grant/Revoke Spec Format
 
-    user:<name>,host:<host>,db:<database>
+    user:<name>,host:<host>,name:<database>
 
 Example:
 
 ``` bash
-./run.sh db:grant user:admin,host:192.168.0.100,db:test
+./run.sh db:grant user:admin,host:192.168.0.100,name:test
 ```
 
 ---
